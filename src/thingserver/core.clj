@@ -4,6 +4,7 @@
         [ring.middleware.content-type]
         [ring.middleware.not-modified]
         [ring.middleware.file])
+  (:require [environ.core :refer [env]])
  (:gen-class))
 
 (defn handler [request]
@@ -12,7 +13,7 @@
    :body "Not Found"})
 
 (def app
-  (-> (wrap-file handler "/Users/rossputin/Sites/thingserver/domain-example")
+  (-> (wrap-file handler (env :dahl-asset-dir))
       (wrap-content-type)
       (wrap-not-modified)))
 
