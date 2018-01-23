@@ -8,14 +8,11 @@
  (:gen-class))
 
 (defn handler [request]
-  {:status 404
-   :headers {"Content-Type" "text/html"}
-   :body "Not Found"})
+  {:status 404 :headers {"Content-Type" "text/html"} :body "Not Found"})
 
 (def app
   (-> (wrap-file handler (env :dahl-asset-dir))
       (wrap-content-type)
       (wrap-not-modified)))
 
-(defn -main []
-  (run-jetty app {:port 3000}))
+(defn -main [] (run-jetty app {:port 3000}))
